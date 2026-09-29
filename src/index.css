@@ -1,0 +1,401 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: light --default;
+}
+
+/* ================================================================== *
+ *  AN-NAJAT GLOBAL ISLAMIC ACADEMY — DESIGN SYSTEM v2
+ *  Deep Midnight Emerald · Champagne Gold · Ivory · Subtle Dot Texture
+ *  Editorial Display (Fraunces) · Plus Jakarta Sans UI · Amiri Arabic
+ * ================================================================== */
+
+@theme {
+  /* Brand — deep midnight emerald */
+  --color-emerald-950: #05140f;
+  --color-emerald-900: #081e17;
+  --color-emerald-850: #0c2b21;
+  --color-emerald-800: #0f3b2e;
+  --color-emerald-700: #165342;
+  --color-emerald-600: #1f6f59;
+  --color-emerald-500: #298d72;
+  --color-emerald-100: #e3efe9;
+  --color-emerald-50: #f2f7f4;
+
+  /* Brand — champagne gold & brass */
+  --color-gold-200: #f4e9cf;
+  --color-gold-300: #e9d6a7;
+  --color-gold-400: #dcc07d;
+  --color-gold-500: #c8a24e;
+  --color-gold-600: #a67f30;
+  --color-gold-700: #7f6023;
+
+  /* Neutrals — warm ivory & linen */
+  --color-cream-50: #fcf9f3;
+  --color-cream-100: #f6efe0;
+  --color-cream-200: #ece0c8;
+  --color-cream-300: #dccbaa;
+
+  /* Ink & Typography */
+  --color-ink: #141716;
+  --color-ink-soft: #3e4844;
+  --color-ink-faint: #67756f;
+
+  /* Semantic */
+  --color-background: var(--color-cream-50);
+  --color-foreground: var(--color-ink);
+  --color-primary: var(--color-emerald-850);
+  --color-accent: var(--color-gold-500);
+
+  /* Fonts */
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-title: 'Fraunces', Georgia, serif;
+  --font-arabic: 'Amiri', 'Traditional Arabic', serif;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: color-mix(in srgb, var(--color-emerald-800) 14%, transparent);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    overflow-x: hidden;
+  }
+
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    font-feature-settings: "kern", "liga", "clig";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.6;
+    position: relative;
+  }
+
+  /* Fixed, whisper-quiet dot field over the ivory ground (like Reference) */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: -10%;
+    z-index: -2;
+    pointer-events: none;
+    background-image: radial-gradient(
+      color-mix(in srgb, var(--color-emerald-800) 60%, transparent) 0.65px,
+      transparent 0.75px
+    );
+    background-size: 22px 22px;
+    opacity: 0.08;
+  }
+
+  /* Fixed warm ambient glow so the ground is never flat */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        60% 45% at 12% 0%,
+        color-mix(in srgb, var(--color-gold-300) 35%, transparent),
+        transparent 70%
+      ),
+      radial-gradient(
+        55% 40% at 100% 30%,
+        color-mix(in srgb, var(--color-cream-200) 60%, transparent),
+        transparent 75%
+      );
+    opacity: 0.6;
+  }
+
+  /* Headings with editorial character */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--color-emerald-950);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-arabic {
+    font-family: var(--font-arabic);
+  }
+
+  /* Kicker / Eyebrow (Reference style with anchor rule) */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-gold-600);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 1.6rem;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.7;
+  }
+
+  /* Section tint for multi-plane depth (Reference style) */
+  .section-tint {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-cream-100) 90%, transparent) 0%,
+      color-mix(in srgb, var(--color-cream-200) 45%, transparent) 100%
+    );
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.75),
+      inset 0 40px 60px -60px rgba(8, 30, 23, 0.15),
+      inset 0 -40px 60px -60px rgba(8, 30, 23, 0.12);
+  }
+
+  /* Hairline rule that softly fades at both ends */
+  .seam {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--color-emerald-800) 25%, transparent) 18%,
+      color-mix(in srgb, var(--color-gold-500) 60%, transparent) 50%,
+      color-mix(in srgb, var(--color-emerald-800) 25%, transparent) 82%,
+      transparent
+    );
+  }
+
+  /* Oversized ghost numeral / word behind a section */
+  .watermark {
+    position: absolute;
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 0.8;
+    letter-spacing: -0.04em;
+    color: color-mix(in srgb, var(--color-emerald-800) 6%, transparent);
+    user-select: none;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .watermark.is-light {
+    color: color-mix(in srgb, var(--color-cream-50) 8%, transparent);
+  }
+
+  /* Radial ambient lift */
+  .deco-glow {
+    position: absolute;
+    border-radius: 999px;
+    background: radial-gradient(
+      closest-side,
+      color-mix(in srgb, var(--color-gold-400) 32%, transparent),
+      color-mix(in srgb, var(--color-gold-400) 8%, transparent) 55%,
+      transparent 78%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Card sheen sweep on hover (Reference style) */
+  .card-sheen {
+    position: relative;
+    isolation: isolate;
+  }
+  .card-sheen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    background: linear-gradient(
+      105deg,
+      transparent 38%,
+      rgba(255, 255, 255, 0.5) 48%,
+      transparent 58%
+    );
+    transform: translateX(-120%);
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  .group:hover .card-sheen::after,
+  .card-sheen:hover::after {
+    transform: translateX(120%);
+  }
+
+  /* Draw-in gold rule for headings */
+  .rule-draw {
+    height: 2px;
+    width: 3.5rem;
+    background: linear-gradient(
+      90deg,
+      var(--color-gold-500),
+      var(--color-gold-300)
+    );
+  }
+
+  /* Frosted glass — dark backgrounds */
+  .glass {
+    background: rgba(8, 30, 23, 0.75);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(244, 233, 207, 0.16);
+    box-shadow:
+      inset 0 1px 0 0 rgba(244, 233, 207, 0.2),
+      0 30px 70px -30px rgba(5, 20, 15, 0.6);
+  }
+
+  /* Frosted glass — light ivory background */
+  .glass-light {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px) saturate(130%);
+    -webkit-backdrop-filter: blur(16px) saturate(130%);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.95),
+      0 24px 60px -34px rgba(8, 30, 23, 0.18);
+  }
+
+  .shadow-card {
+    box-shadow: 0 24px 50px -28px rgba(8, 30, 23, 0.15);
+  }
+  .shadow-float {
+    box-shadow: 0 35px 80px -35px rgba(8, 30, 23, 0.28);
+  }
+
+  /* Marquee tape (Reference style) */
+  @keyframes marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+  .marquee-track {
+    display: inline-flex;
+    flex-shrink: 0;
+    gap: 0;
+    animation: marquee 35s linear infinite;
+    will-change: transform;
+  }
+  .marquee-mask:hover .marquee-track {
+    animation-play-state: paused;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+  }
+
+  /* Dot pattern helper */
+  .bg-dots {
+    background-image: radial-gradient(currentColor 1px, transparent 1.3px);
+    background-size: 18px 18px;
+  }
+
+  /* Text gold gradient */
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #f4e9cf 0%, #dcc07d 50%, #c8a24e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Mesh gradient backgrounds */
+  .mesh-emerald {
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 0%, rgba(15,59,46,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 100%, rgba(200,162,78,0.07) 0%, transparent 55%),
+      var(--color-cream-50);
+  }
+  .mesh-dark {
+    background:
+      radial-gradient(ellipse 70% 55% at 15% 30%, rgba(200,162,78,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 85% 70%, rgba(15,59,46,0.3) 0%, transparent 55%),
+      #04100c;
+  }
+
+  /* Gold stat number — large display */
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    background: linear-gradient(135deg, #f4e9cf 0%, #dcc07d 50%, #c8a24e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Responsive typographic scale */
+  .text-hero {
+    font-size: clamp(2.2rem, 5vw, 4.2rem);
+    line-height: 1.07;
+    letter-spacing: -0.03em;
+  }
+  .text-section-title {
+    font-size: clamp(1.75rem, 3.5vw, 2.8rem);
+    line-height: 1.16;
+    letter-spacing: -0.025em;
+  }
+
+  /* Hover animated gold underline */
+  .hover-gold-line { position: relative; display: inline-block; }
+  .hover-gold-line::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 100%; height: 1.5px;
+    background: linear-gradient(90deg, var(--color-gold-500), var(--color-gold-300));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .hover-gold-line:hover::after { transform: scaleX(1); }
+
+  /* Gold tag pill */
+  .tag-gold {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    background: color-mix(in srgb, var(--color-gold-400) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-gold-500) 35%, transparent);
+    color: var(--color-gold-600);
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 0.2rem 0.65rem; border-radius: 999px;
+  }
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-gold-500) 40%, transparent);
+  color: #05140f;
+}
+
+/* Custom Scrollbar */
+@media (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f6efe0;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #0f3b2e;
+    border: 2.5px solid #f6efe0;
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #165342;
+  }
+}
